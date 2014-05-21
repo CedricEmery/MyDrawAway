@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.app.Accueil"
+    tools:ignore="MergeRootFrame"
+    android:screenOrientation="portrait">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:id="@+id/custom_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Draw Away "
+                android:textSize="50sp"
+                android:textStyle="bold"
+                android:textColor="#000080"
+                android:layout_marginLeft="50dip"
+                android:layout_marginRight="50dip"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="350sp"
+            >
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            ></LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/application"
+                android:layout_width="109dp"
+                android:layout_height="89dp"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:textSize="20sp"
+                android:background="@drawable/start"
+                android:onClick="DrawAppli" />
+
+            <Button
+                android:id="@+id/quit"
+                android:layout_width="87dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:textSize="20sp"
+                android:background="@drawable/stop"
+                android:onClick="Quitter"
+                android:layout_weight="0.06" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,156 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/crump2"
+    tools:context="com.example.app.MainActivity"
+    tools:ignore="MergeRootFrame"
+    android:screenOrientation="portrait">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/menu3"
+            android:layout_height="215dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hauteur : "
+                android:textStyle="bold"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:id="@+id/textView2" />
+
+            <EditText
+                android:id="@+id/hauteur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Hauteur/Rayon"
+                android:inputType="numberDecimal"
+                android:autoText="false"
+                android:layout_alignBottom="@+id/valider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Largeur : "
+                android:textStyle="bold"
+                android:textColor="#FF0000"
+                android:gravity="center"
+                android:id="@+id/textView"
+                android:layout_below="@+id/valider"
+                android:layout_alignRight="@+id/textView2"
+                android:layout_alignEnd="@+id/textView2" />
+
+            <EditText
+                android:id="@+id/largeur"
+                android:layout_width="149dp"
+                android:layout_height="wrap_content"
+                android:hint="Largeur"
+                android:inputType="numberDecimal"
+                android:layout_alignBottom="@+id/couleur"
+                android:layout_alignRight="@+id/hauteur"
+                android:layout_alignEnd="@+id/hauteur" />
+
+            <Spinner
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spin"
+                android:layout_below="@+id/largeur"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="visible"
+                android:focusable="false" />
+
+            <Button
+                android:id="@+id/valider"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Valider"
+                android:onClick="DrawFigure"
+                android:layout_weight="1.67"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Couleur"
+                android:id="@+id/couleur"
+                android:layout_weight="0.36"
+                android:layout_below="@+id/valider"
+                android:layout_alignLeft="@+id/valider"
+                android:layout_alignStart="@+id/valider"
+                android:layout_above="@+id/edition" />
+
+            <Button
+                android:id="@+id/raz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Reset"
+                android:onClick="onRaz"
+                android:layout_below="@+id/valider"
+                android:layout_toRightOf="@+id/couleur" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supprimer"
+                android:id="@+id/buttonSup"
+                android:onClick="SuprFigure"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/raz"
+                android:layout_alignStart="@+id/raz"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <com.example.app.ColorPicker
+                android:id="@+id/colorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.8" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edition"
+                android:id="@+id/edition"
+                android:onClick="EditFigure"
+                android:layout_toRightOf="@+id/couleur"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/raz" />
+
+            <SeekBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/angle"
+                android:layout_alignBottom="@+id/edition"
+                android:layout_toRightOf="@+id/largeur"
+                android:layout_toLeftOf="@+id/edition"
+                android:mirrorForRtl="false"
+                android:max="360"
+                android:indeterminate="false" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+        </LinearLayout>
+
+        <com.example.app.GeometryLayer
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/calque_dessin"
+            />
+    </LinearLayout>
+</FrameLayout>
