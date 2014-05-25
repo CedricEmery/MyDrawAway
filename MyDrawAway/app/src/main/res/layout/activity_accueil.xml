@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.app.Accueil"
     tools:ignore="MergeRootFrame"
-    android:screenOrientation="portrait">
+    android:screenOrientation="portrait"
+    android:background="@drawable/bg_home">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -49,6 +50,20 @@
             android:background="@drawable/start"
             android:onClick="DrawAppli"
             android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="ITIER LOUIS"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Cedric Emery"
+            android:id="@+id/textView2" />
     </LinearLayout>
 
     <Button
