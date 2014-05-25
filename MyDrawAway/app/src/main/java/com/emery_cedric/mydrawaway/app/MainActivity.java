@@ -241,6 +241,7 @@ public class MainActivity extends Activity {
 
         DisableButton();
         boolDessin = true;
+
     }
 
     public void SuprFigure(View v) {
