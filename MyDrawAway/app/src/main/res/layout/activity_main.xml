@@ -15,12 +15,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-<<<<<<< HEAD
+
             android:layout_height="215dp">
-=======
-            android:background="@android:color/background_light"
-            android:layout_height="169dp">
->>>>>>> 0df38b62ca5d73115121d85582f835476f24fab2
+
 
             <TextView
                 android:layout_width="wrap_content"
