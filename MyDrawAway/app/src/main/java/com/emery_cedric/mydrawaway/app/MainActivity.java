@@ -1,28 +1,21 @@
 package com.emery_cedric.mydrawaway.app;
 
 import android.app.Activity;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
-import android.support.v7.app.ActionBarActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.os.Bundle;
-import android.view.Menu;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Spinner;
-import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 
 

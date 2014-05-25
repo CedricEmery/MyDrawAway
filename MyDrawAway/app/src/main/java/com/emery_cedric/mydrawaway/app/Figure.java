@@ -7,69 +7,70 @@ import android.graphics.Paint;
  * Created by Hor on 30/04/14.
  */
 public abstract class Figure {
-    private int X;
-    private int Y;
-    private int hauteur;
-    private int largeur;
-    private int angle;
-    private Paint paint;
+    private int m_iX;
+    private int m_iY;
+    private int m_iHeight;
+    private int m_iWidth;
+    private int m_iAngle;
+    private Paint m_paint;
 
-
+// ----------------------------------PUBLIC----------------------------------------------------
     //Setter des paramètres
-    public void setX(int X) {
-        this.X = X;
+    public void setX(int iX) {
+        this.m_iX = iX;
     }
 
-    public void setLargeur(int largeur) {
-        this.largeur = largeur;
+    public void setY(int iY) {
+        this.m_iY = iY;
     }
 
-    public void setHauteur(int hauteur) {
-        this.hauteur = hauteur;
+    public void setAngle(int iAngle){ this.m_iAngle = iAngle;}
+
+    public void setLargeur(int iWidth) {
+        this.m_iWidth = iWidth;
+    }
+
+    public void setHauteur(int iHeight) {
+        this.m_iHeight = iHeight;
     }
 
     public void setPaint(Paint paint) {
-        this.paint = paint;
+        this.m_paint = paint;
     }
-
-    public void setY(int Y) {
-        this.Y = Y;
-    }
-
-    public void setAngle(int angle){ this.angle = angle;}
 
 
     //Getteur des paramètres
     public int getY() {
-        return this.Y;
+        return this.m_iY;
     }
 
     public int getHauteur() {
-        return this.hauteur;
+        return this.m_iHeight;
     }
 
     public int getLargeur() {
-        return this.largeur;
+        return this.m_iWidth;
     }
 
     public Paint getPaint() {
-        return this.paint;
+        return this.m_paint;
     }
 
     public int getX() {
-        return X;
+        return this.m_iX;
     }
 
     public int getAngle() {
-        return angle;
+        return this.m_iAngle;
     }
 
-
-
-    protected Figure() {
-        X = 0;
-        Y = 0;
-    }
 
     public abstract void create(Canvas canvas);
+
+    // ----------------------------------PROTECTED---------------------------------------------
+    protected Figure() {
+        setX(0);
+        setY(0);
+    }
+
 }
