@@ -19,32 +19,30 @@ import android.widget.Spinner;
 
 
 public class MainActivity extends Activity {
-    GeometryLayer calque;
-    String figure;
+    protected GeometryLayer calque;
+    protected String figure;
 
-    EditText largeur;
-    EditText hauteur;
+    protected EditText largeur;
+    protected EditText hauteur;
 
-    //Booleen de vérouillage de bouton
-    public static boolean boolDessin = false;
-    public static boolean boolSupr = false;
-    public static boolean boolEdit = false;
+    protected boolean boolDessin = false;
+    protected boolean boolSupr = false;
+    protected boolean boolEdit = false;
 
 
-    private Figure figureEnCour;
+    protected Figure figureEnCour;
 
 
 
 
     //Variable boite de dialogue des couleurs
-    private ColorPicker colorPicker;
-    private Button button;
-    public int rouge = 0;
-    public int vert = 0;
-    public int bleu = 0;
+    protected ColorPicker colorPicker;
+    protected Button button;
+    protected int rouge = 0;
+    protected int vert = 0;
+    protected int bleu = 0;
 
-    //share all informations with other classes (public static variables)
-    public static int X, Y;
+    protected int X = 0, Y = 0;
 
 
     //Fonction pour la boite de dialogue de selection de couleur
@@ -77,7 +75,6 @@ public class MainActivity extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         };
     }
@@ -94,10 +91,9 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         //Boite de dialogue des couleur
         colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
@@ -113,186 +109,157 @@ public class MainActivity extends Activity {
             }
         });
 
-
-        //initialize variables of the class
-        X =0;
-        Y =0;
-
-        //Calque de la vue
         calque  = (GeometryLayer)findViewById(R.id.calque_dessin);
 
-        //initialize the array of figures
+        // initialize the array of figures
         initAvailableForms();
 
-        //Initialisation des evenements
+        // Initialisation des evenements
         final View touchView = findViewById(R.id.calque_dessin);
 
+
+        // Lorsque l'on touche l'ecran
         touchView.setOnTouchListener(
-                new View.OnTouchListener() {
-                    public boolean onTouch(View myView, MotionEvent event) {
-                        int action = event.getAction();
+            new View.OnTouchListener() {
+                public boolean onTouch(View myView, MotionEvent event) {
 
-                        //coordonnées optenuent du tactile
-                        int Xpos = (int) event.getX();
-                        int Ypos = (int) event.getY();
+                    int action = event.getAction();
 
-                        int ilargeur = 0;
-                        int ihauteur =0;
+                    int iXpos, iYpos, iLargeur, iHauteur;
+                    iXpos = iYpos = iLargeur = iHauteur= 0;
 
-                        try{
-                            //Coordonnées tapés
-                            largeur = (EditText) findViewById(R.id.largeur);
-                            hauteur = (EditText) findViewById(R.id.hauteur);
+                    try{
+                        // recuperation des dimentions
+                        largeur = (EditText) findViewById(R.id.largeur);
+                        hauteur = (EditText) findViewById(R.id.hauteur);
 
-                            ilargeur = Integer.parseInt(largeur.getText().toString());
-                            ihauteur = Integer.parseInt(hauteur.getText().toString());
-                        }
-                        catch (NumberFormatException e) {
-                            System.out.println("Erreur");
-                        }
-
-                        //Paramètre de couleur et mise en forme
-                        Paint myPaint = new Paint();
-                        myPaint.setARGB(255, rouge, vert, bleu);
-                        myPaint.setStrokeWidth(3);
-                        myPaint.setStyle(Paint.Style.STROKE);
-
-                        //Paramètre de l'angle d'orientation de la figure
-                        SeekBar seekBar = (SeekBar) findViewById(R.id.angle);
-                        int angle = 0;
-                        angle = seekBar.getProgress();
-
-                        //En fonction du type d'actions
-                        if (action==MotionEvent.ACTION_DOWN)
-                        {
-
-                            //Si il y a au moins une figure
-                            if(calque.existe()){
-
-                                //Récupère au clic la figure la plus proche
-                                figureEnCour = calque.findToMove(Xpos, Ypos);
-                            }
-
-
-                            //Si le boutton supprimer est actif alors on supprime
-                            if(boolSupr){
-                                calque.removeFigure(figureEnCour);
-
-                                //Récupère au clic la figure la plus proche
-                                figureEnCour = calque.findToMove(Xpos, Ypos);
-                            }
-
-
-                            //Si le boutton edition est actif alors on edite
-                            if(boolEdit){
-
-                                //On modifie en fonction des paramètre
-                                figureEnCour.setPaint(myPaint);
-                                figureEnCour.setLargeur(ilargeur);
-                                figureEnCour.setHauteur(ihauteur);
-                                figureEnCour.setAngle(angle);
-
-                                //On actualise l'écran
-                                calque.actualiseScreen();
-                            }
-
-                            if (boolDessin == true) {
-
-                                if (figure.equals("Rectangle")) {
-                                    Figure form;
-                                    form = new Rectangle(ilargeur, ihauteur, Xpos, Ypos,angle,myPaint);
-                                    //form.setX(Xpos);
-                                    //form.setY(Ypos);
-                                    calque.addFigure(form);
-                                } else if (figure.equals("Cercle")) {
-                                    Figure form;
-                                    form = new Circle(Xpos, Ypos, ihauteur,ilargeur,angle,myPaint);
-                                    //form.setX(Xpos);
-                                    //form.setY(Ypos);
-                                    calque.addFigure(form);
-                                } else if (figure.equals("Triangle")) {
-                                    Figure form;
-                                    form = new Triangle(Xpos, Ypos, ilargeur, ihauteur,angle,myPaint);
-                                    //form.setX(Xpos);
-                                    //form.setY(Ypos);
-                                    calque.addFigure(form);
-                                }
-                            }
-
-
-
-
-                        }
-                        else if (action==MotionEvent.ACTION_UP)
-                        {
-
-                            //Confirmation de la suppresion
-                            if(boolSupr){
-                                boolSupr = false;
-                            }
-                            if(boolDessin){
-                                boolDessin = false;
-                            }
-                            if(boolEdit){
-                                boolEdit = false;
-                            }
-
-
-                        }
-                        else if (action==MotionEvent.ACTION_MOVE)
-                        {
-
-                            //Si il y a au moins un calque
-                            if(calque.existe()){
-                                //Pour le déplacement de la figure la plus proche
-                                if(boolSupr!=true && boolDessin!=true){
-                                    Figure TMP =  figureEnCour;
-
-                                    TMP.setX((int) event.getX());
-                                    TMP.setY((int) event.getY());
-
-                                    //On supprime la figure passé
-                                    calque.addFigure(TMP);
-                                }
-                            }
-
-                        }
-
-                        return true;
+                        // recuperation des donnees d'emplacement
+                        iXpos = (int) event.getX();
+                        iYpos = (int) event.getY();
+                        iLargeur = Integer.parseInt(largeur.getText().toString());
+                        iHauteur = Integer.parseInt(hauteur.getText().toString());
                     }
+                    catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+
+                    Paint myPaint = new Paint();
+                    myPaint.setARGB(255, rouge, vert, bleu);
+                    myPaint.setStrokeWidth(3);
+                    myPaint.setStyle(Paint.Style.STROKE);
+
+                    // angle d'orientation de la figure
+                    SeekBar seekBar = (SeekBar) findViewById(R.id.angle);
+                    int iAngle = seekBar.getProgress();
+
+
+                    if (action==MotionEvent.ACTION_DOWN){
+                        OnActionDown(iXpos, iYpos, iHauteur, iLargeur, iAngle,myPaint);
+                    }
+                    else if (action==MotionEvent.ACTION_UP){
+                        OnActionUp();
+                    }
+                    else if (action==MotionEvent.ACTION_MOVE){
+                        OnActionMove(event);
+                    }
+                    return true;
                 }
+            }
         );
-
-
     }
 
+    protected void OnActionMove(MotionEvent event){
+        if(calque.existe()){
 
+            if(boolSupr!=true && boolDessin!=true){
+                Figure TMP =  figureEnCour;
+                calque.removeFigure(figureEnCour);
 
+                TMP.setX((int) event.getX());
+                TMP.setY((int) event.getY());
+
+                calque.addFigure(TMP);
+            }
+        }
+    }
+
+    protected void OnActionUp(){
+        if(boolSupr){
+            boolSupr = false;
+        }
+        if(boolDessin){
+            boolDessin = false;
+        }
+        if(boolEdit){
+            boolEdit = false;
+        }
+    }
+
+    protected void OnActionDown(int iXpos, int iYpos, int iHauteur, int iLargeur, int iAngle,Paint myPaint){
+        if(calque.existe()){
+
+            // Permet de recuperer la figure la plus proche
+            figureEnCour = calque.findToMove(iXpos, iYpos);
+        }
+
+        if(boolSupr){
+            calque.removeFigure(figureEnCour);
+        }
+        else if(boolEdit){
+            AlterFigure(iHauteur, iLargeur, iAngle, myPaint);
+        }
+        else if (boolDessin == true){
+            AddFigure(iXpos, iYpos, iHauteur, iLargeur, iAngle,myPaint);
+        }
+        calque.actualiseScreen();
+    }
+
+    protected void AddFigure(int iXpos, int iYpos, int iHauteur, int iLargeur, int iAngle,Paint myPaint){
+        if (figure.equals("Rectangle")) {
+            Figure form;
+            form = new Rectangle(iLargeur, iHauteur, iXpos, iYpos,iAngle,myPaint);
+            calque.addFigure(form);
+        } else if (figure.equals("Cercle")) {
+            Figure form;
+            form = new Circle(iXpos, iYpos, iHauteur,iLargeur,iAngle,myPaint);
+            calque.addFigure(form);
+        } else if (figure.equals("Triangle")) {
+            Figure form;
+            form = new Triangle(iXpos, iYpos, iLargeur, iHauteur,iAngle,myPaint);
+            calque.addFigure(form);
+        }
+    }
+
+    protected void AlterFigure(int iHauteur, int iLargeur, int iAngle,Paint myPaint){
+        figureEnCour.setPaint(myPaint);
+        figureEnCour.setLargeur(iLargeur);
+        figureEnCour.setHauteur(iHauteur);
+        figureEnCour.setAngle(iAngle);
+    }
 
     public void DrawFigure(View v) {
 
-        //On passe le booleen a vrai et on donne le droit de dessiner
+        DisableButton();
         boolDessin = true;
-        boolSupr = false;
-        boolEdit = false;
     }
 
     public void SuprFigure(View v) {
 
-        //On passe le booleen a vrai et on donne le droit de Supprimer
+        DisableButton();
         boolSupr = true;
-        boolDessin = false;
-        boolEdit = false;
     }
 
     public void EditFigure(View v) {
 
-        //On passe le booleen a vrai et on donne le droit de Supprimer
+        DisableButton();
         boolEdit = true;
+    }
+
+    public void DisableButton(){
+        boolEdit = false;
         boolDessin = false;
         boolSupr = false;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
