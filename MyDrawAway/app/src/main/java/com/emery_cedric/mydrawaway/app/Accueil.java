@@ -2,29 +2,32 @@ package com.emery_cedric.mydrawaway.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class Accueil extends Activity {
 
     GeometryLayer calque1;
+
+    //Pour la musique
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
+        //Lancement de la musique en boucle
+        mp = MediaPlayer.create(this, R.raw.musique);
+        mp.start();
+        mp.setLooping(true);
 
         final Button buttonAccueil = (Button) findViewById(R.id.application);
         buttonAccueil.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +80,8 @@ public class Accueil extends Activity {
     }
 
     public void Quitter(View view) {
+        mp.stop();
         finish();
-
     }
 
 }

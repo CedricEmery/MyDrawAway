@@ -37,8 +37,6 @@ public class MainActivity extends Activity {
     private Figure figureEnCour;
     public Figure figureTemp;
 
-    //Pour la musique
-    MediaPlayer mp;
 
 
 
@@ -103,10 +101,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Lancement de la musique en boucle
-        mp = MediaPlayer.create(this, R.raw.musique);
-        mp.start();
-        mp.setLooping(true);
+
 
         //Boite de dialogue des couleur
         colorPicker = (ColorPicker) findViewById(R.id.colorPicker);
