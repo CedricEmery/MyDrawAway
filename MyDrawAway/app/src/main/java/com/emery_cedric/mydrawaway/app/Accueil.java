@@ -24,10 +24,8 @@ public class Accueil extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
-        //Lancement de la musique en boucle
-        mp = MediaPlayer.create(this, R.raw.musique);
-        mp.start();
-        mp.setLooping(true);
+
+        StartMusic();
 
         final Button buttonAccueil = (Button) findViewById(R.id.application);
         buttonAccueil.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +80,12 @@ public class Accueil extends Activity {
     public void Quitter(View view) {
         mp.stop();
         finish();
+    }
+
+    protected void StartMusic(){
+        mp = MediaPlayer.create(this, R.raw.musique);
+        mp.start();
+        mp.setLooping(true);
     }
 
 }
