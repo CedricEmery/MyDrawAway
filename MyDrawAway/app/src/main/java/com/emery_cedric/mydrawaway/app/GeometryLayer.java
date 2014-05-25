@@ -1,24 +1,15 @@
 package com.emery_cedric.mydrawaway.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import static java.lang.StrictMath.abs;
 
 
-/**
- * Created by Hor on 30/04/14.
- */
 public class GeometryLayer extends View {
     public static ArrayList<Figure> Listfigure = new ArrayList<Figure>();
     public GeometryLayer(Context context) {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/crump2"
-    tools:context="com.example.app.MainActivity"
+    tools:context="com.emery_cedric.mydrawaway.app.MainActivity"
     tools:ignore="MergeRootFrame"
     android:screenOrientation="portrait">
     <LinearLayout
@@ -109,7 +109,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <com.example.app.ColorPicker
+            <com.emery_cedric.mydrawaway.app.ColorPicker
                 android:id="@+id/colorPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -147,7 +147,7 @@
 
         </LinearLayout>
 
-        <com.example.app.GeometryLayer
+        <com.emery_cedric.mydrawaway.app.GeometryLayer
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:id="@+id/calque_dessin"

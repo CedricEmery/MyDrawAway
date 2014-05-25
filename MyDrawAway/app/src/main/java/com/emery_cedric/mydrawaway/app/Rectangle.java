@@ -1,71 +1,40 @@
 package com.emery_cedric.mydrawaway.app;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.util.Log;
 
-import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.StrictMath.pow;
 
-/**
- * Created by Hor on 30/04/14.
- */
+
 public class Rectangle extends Figure {
 
     public void create(Canvas canvas) {
 
-        //Point.x = Doigt.x + cos(rotation <- radian) * distance
-        //Point.y = Doigt.y + sin(rotation <-radian aussi) * distance
+        Point centralPoint= new Point();
+        centralPoint.setX(this.getX() - (this.getLargeur() / 2));
+        centralPoint.setY(this.getY()-(this.getHauteur()/2));
+
+        float fDistance = (float)sqrt(  pow(centralPoint.getX()-this.getX(),2) + pow(centralPoint.getY()-this.getY(),2) );
+
+        double dRectangleAngle[] = new double[4];
+        InitAngle(dRectangleAngle);
+
+        Point RactanglePoint[] = new Point[3];
+        InitPoint(dRectangleAngle, RactanglePoint, fDistance);
 
 
-
-        //Quand on clique il sagit du point central de la figure donc on calcule en fonction de.
         Path tri = new Path();
+        tri.lineTo(RactanglePoint[4].getX(), RactanglePoint[4].getY());
 
-        //Calcul des point de base utile
-        float point1X=this.getX() - (this.getLargeur() / 2);
-        float point1Y= this.getY()-(this.getHauteur()/2);
-        ////////////////////////////////
-
-        //Calcul de la distance//
-        float distance = (float)sqrt(  pow(point1X-this.getX(),2) + pow(point1Y-this.getY(),2) );
-        /////////////////////////
-
-        //Calcul des angles pour chaque points
-        double angleR = this.getAngle()*Math.PI/180;
-        double angleR2 = (this.getAngle()+90)*Math.PI/180;
-        double angleR3 = (this.getAngle()+180)*Math.PI/180;
-        double angleR4 = (this.getAngle()+270)*Math.PI/180;
-        /////////////////////////////////////////
-
-
-        //Calcul des nouveaux points
-        float pt1xN = this.getX() + (float)(cos(angleR)*distance);
-        float pt1yN = this.getY() +(float)(sin(angleR)*distance);
-
-        float pt2xN = this.getX() + (float)(cos(angleR2)*distance);
-        float pt2yN = this.getY() +(float)(sin(angleR2)*distance);
-
-        float pt3xN = this.getX() + (float)(cos(angleR3)*distance);
-        float pt3yN = this.getY() +(float)(sin(angleR3)*distance);
-
-        float pt4xN = this.getX() + (float)(cos(angleR4)*distance);
-        float pt4yN = this.getY() +(float)(sin(angleR4)*distance);
-
-        //Demarrage
-        tri.moveTo(pt4xN, pt4yN);
-
-        //Différent points
-        tri.lineTo(pt1xN, pt1yN);
-        tri.lineTo(pt2xN , pt2yN);
-
-        tri.lineTo(pt3xN ,pt3yN);
-        tri.lineTo(pt4xN ,pt4yN);
+        int i = 0;
+        for(Point p : RactanglePoint){
+            tri.lineTo(RactanglePoint[i].getX(), RactanglePoint[i].getY());
+            i++;
+        }
         tri.close();
 
         canvas.drawPath(tri, this.getPaint());
@@ -82,5 +51,22 @@ public class Rectangle extends Figure {
         setAngle(angle);
     }
 
+    protected void InitAngle(double dRectangleAngle[])
+    {
+        int i = 0;
+        for(double angle : dRectangleAngle){
+            angle = (this.getAngle()+(90*i))*Math.PI/180;
+            i++;
+        }
+    }
 
+    protected void InitPoint(double dRectangleAngle[], Point RactanglePoint[], float fDistance)
+    {
+        int i = 0;
+        for(Point p : RactanglePoint){
+            p.setX(this.getX() + (float)(cos(dRectangleAngle[i])*fDistance));
+            p.setY(this.getY() +(float)(sin(dRectangleAngle[i])*fDistance));
+            i++;
+        }
+    }
 }

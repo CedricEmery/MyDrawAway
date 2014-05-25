@@ -1,8 +1,6 @@
 package com.emery_cedric.mydrawaway.app;
 
-/**
- * Created by Fixe Cedric on 24/05/2014.
- */
+
 public class Point {
 
     protected float m_fX;
