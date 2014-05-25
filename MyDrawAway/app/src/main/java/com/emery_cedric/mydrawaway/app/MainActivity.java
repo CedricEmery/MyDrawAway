@@ -3,7 +3,6 @@ package com.emery_cedric.mydrawaway.app;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,8 +21,6 @@ import android.widget.Spinner;
 public class MainActivity extends Activity {
     GeometryLayer calque;
     String figure;
-    Spinner listForm = null;
-    private Button btnValider;
 
     EditText largeur;
     EditText hauteur;
@@ -35,7 +32,6 @@ public class MainActivity extends Activity {
 
 
     private Figure figureEnCour;
-    public Figure figureTemp;
 
 
 
@@ -256,9 +252,6 @@ public class MainActivity extends Activity {
                                     TMP.setY((int) event.getY());
 
                                     //On supprime la figure passé
-                                    calque.removeFigure(figureEnCour);
-
-                                    //figureEnCour = figureTemp;
                                     calque.addFigure(TMP);
                                 }
                             }
@@ -269,6 +262,7 @@ public class MainActivity extends Activity {
                     }
                 }
         );
+
 
     }
 

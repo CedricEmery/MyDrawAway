@@ -25,7 +25,7 @@ public class Accueil extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-        StartMusic();
+        //StartMusic();
 
         final Button buttonAccueil = (Button) findViewById(R.id.application);
         buttonAccueil.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class Accueil extends Activity {
     }
 
     public void Quitter(View view) {
-        mp.stop();
+        //mp.stop();
         finish();
     }
 
